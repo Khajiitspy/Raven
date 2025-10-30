@@ -1,0 +1,9 @@
+Create Maven project: 
+	mvn archetype:generate -DgroupId=<group name> -DartifactId=<name> -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+
+Build project:
+	mvn package
+
+Run project:
+	java -cp target/<name>-1.0-SNAPSHOT.jar <group name>.App
+		// You can also change the .jar file name output using "<finalName>some-name</finalName>" to have a consistent file
