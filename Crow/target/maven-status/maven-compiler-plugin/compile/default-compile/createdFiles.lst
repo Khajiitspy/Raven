@@ -1,3 +1,4 @@
 Graveyard/App.class
 Graveyard/utils/HibernateHelper.class
+Graveyard/repositories/CategoryRepository.class
 Graveyard/entities/CategoryEntity.class

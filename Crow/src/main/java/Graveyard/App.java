@@ -2,22 +2,57 @@ package Graveyard;
 
 import Graveyard.entities.CategoryEntity;
 import Graveyard.utils.HibernateHelper;
+import Graveyard.repositories.CategoryRepository;
+
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println( "Привіт козаки!");
+        System.out.println("Привіт козаки!");
 
-        //SimpleInsert();
-        //SimpleInsertFactory();
+        CategoryRepository repo = new CategoryRepository();
 
-        var session = HibernateHelper.getSession();
-        try {
-            var result = session.createSelectionQuery("from CategoryEntity", CategoryEntity.class)
-                    .getResultList();
-            result.forEach(System.out::println);
-        }catch (Exception e) {
-            System.out.println("Хюсто у нас проблеми "+e);
-        }
+        // CREATE
+        // repo.create(new CategoryEntity("Борщ"));
+        // repo.create(new CategoryEntity("Вареники"));
+
+        // READ ALL
+        List<CategoryEntity> categories = repo.findAll();
+        System.out.println("Categories in DB:");
+        categories.forEach(System.out::println);
+
+        // READ BY ID
+        repo.findById(1).ifPresentOrElse(
+                c -> System.out.println("Found: " + c),
+                () -> System.out.println("Category not found.")
+        );
+
+        // UPDATE
+        // repo.findById(1).ifPresent(cat -> {
+        //     cat.setName("Оновлена категорія");
+        //     repo.update(cat);
+        // });
+
+        // DELETE
+        // repo.delete(2);
+
+        // Show final list
+        System.out.println("After operations:");
+        repo.findAll().forEach(System.out::println);
+
+        // OLD CODE
+        // 
+        // // SimpleInsert();
+        // // SimpleInsertFactory();
+
+        // var session = HibernateHelper.getSession();
+        // try {
+        //     var result = session.createSelectionQuery("from CategoryEntity", CategoryEntity.class)
+        //             .getResultList();
+        //     result.forEach(System.out::println);
+        // }catch (Exception e) {
+        //     System.out.println("Хюсто у нас проблеми "+e);
+        // }
     }
 
     private static void SimpleInsert() {
@@ -49,6 +84,6 @@ public class App {
             session.persist(new CategoryEntity("Кабачок"));
             session.persist(new CategoryEntity("Диня"));
         });
-        sessionFactory.close();
+        // sessionFactory.close();
     }
 }
