@@ -4,6 +4,10 @@ Create Maven project:
 Build project:
 	mvn package
 
-Run project:
+Run project: (made script for deploying to .jar)
 	java -cp target/<name>-1.0-SNAPSHOT.jar <group name>.App
 		// You can also change the .jar file name output using "<finalName>some-name</finalName>" to have a consistent file
+
+	Quick Run:
+		mvn exec:java -Dexec.mainClass="Graveyard.App"
+
