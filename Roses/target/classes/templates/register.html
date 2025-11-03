@@ -9,15 +9,15 @@
   <div class="container">
     <h2 class="mb-3">User Registration</h2>
 
-    <form th:action="@{/register}" th:object="${user}" method="post" class="w-50">
+    <form th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data" class="w-50">
       <div class="mb-3">
         <label class="form-label">Username</label>
         <input th:field="*{username}" type="text" class="form-control" placeholder="Enter username" required>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Image URL</label>
-        <input th:field="*{image}" type="text" class="form-control" placeholder="http://example.com/avatar.jpg">
+        <label class="form-label">Profile Image</label>
+        <input name="imageFile" type="file" class="form-control">
       </div>
 
       <div class="mb-3">

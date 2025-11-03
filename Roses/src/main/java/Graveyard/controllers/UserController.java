@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class UserController {
@@ -28,10 +32,31 @@ public class UserController {
         return "register"; // templates/register.html
     }
 
-    // Handle registration form submission
     @PostMapping("/register")
-    public String registerSubmit(@ModelAttribute UserEntity user) {
-        userRepository.save(user);
+    public String registerSubmit(@ModelAttribute UserEntity user,
+                                 @RequestParam("imageFile") MultipartFile imageFile) {
+        try {
+            if (!imageFile.isEmpty()) {
+                // Set the folder where you want to save uploaded files
+                String uploadDir = System.getProperty("user.dir") + "/uploads"; // project root
+                Path uploadPath = Paths.get(uploadDir);
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                String filename = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+                Path filePath = uploadPath.resolve(filename);
+                imageFile.transferTo(filePath.toFile());
+
+                user.setImage("/uploads/" + filename); // to use in <img th:src="${user.image}">
+            }
+
+            userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // You might want to handle this better in production
+        }
+
         return "redirect:/";
     }
 }
