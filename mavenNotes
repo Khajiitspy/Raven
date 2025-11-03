@@ -11,3 +11,5 @@ Run project: (made script for deploying to .jar)
 	Quick Run:
 		mvn exec:java -Dexec.mainClass="Graveyard.App"
 
+		mvn springboot:run
+
