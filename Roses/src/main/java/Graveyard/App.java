@@ -18,15 +18,6 @@ public class App {
     @Bean
     CommandLineRunner runner(IUserRepository repository) {
         return args -> {
-            // if (repository.findByUsername("admin").isEmpty()) {
-            //     UserEntity user = new UserEntity();
-            //     user.setUsername("admin");
-            //     user.setPassword("");
-            //     repository.save(user);
-            //     System.out.println("✅ Created admin user.");
-            // } else {
-            //     System.out.println("ℹ️ Admin user already exists, skipping insert.");
-            // }
         };
     }
 }
