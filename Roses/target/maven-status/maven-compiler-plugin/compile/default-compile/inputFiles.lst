@@ -8,6 +8,11 @@
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/controllers/UserController.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/AppDbSeeder.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/constants/RolesConstants.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/data_transfer_objects/ForgotPasswordDTO.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/data_transfer_objects/RegisterUserDTO.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/data_transfer_objects/ResetPasswordDTO.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/smtp/EmailConfiguration.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/smtp/EmailMessage.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/entities/RoleEntity.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/entities/UserEntity.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/repository/IRoleRepository.java
@@ -15,4 +20,5 @@
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/security/CustomUserDetails.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/AccountService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/FileService.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/SmtpService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/UserInfoService.java

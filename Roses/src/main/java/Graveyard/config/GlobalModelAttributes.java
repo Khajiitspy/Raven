@@ -1,4 +1,4 @@
-package org.example.config;
+package Graveyard.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
