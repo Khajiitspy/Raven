@@ -21,6 +21,7 @@ Graveyard/repository/IUserRepository.class
 Graveyard/services/UserInfoService.class
 Graveyard/data/data_transfer_objects/ForgotPasswordDTO.class
 Graveyard/App.class
+Graveyard/controllers/ProductController.class
 Graveyard/security/CustomUserDetails.class
 Graveyard/services/SmtpService$1.class
 Graveyard/entities/ImageEntity.class
@@ -32,4 +33,5 @@ Graveyard/mappers/ProductMapperImpl.class
 Graveyard/data/seed/CategorySeed.class
 Graveyard/config/SecurityConfig.class
 Graveyard/entities/UserEntity.class
+Graveyard/services/ProductService.class
 Graveyard/mappers/ProductMapper.class

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+
+<head>
+  <title>Наші товари</title>
+</head>
+
+<body>
+  <div layout:fragment="content" class="flex flex-col items-center px-6 py-8">
+    <h1 class="text-3xl font-bold mb-8 text-green-700">Наші товари</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+
+      <div th:each="product : ${products}"
+        class="product-card bg-white border border-green-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 flex flex-col">
+
+        <div class="relative w-full h-64 overflow-hidden group">
+          <div class="carousel-images flex transition-transform duration-500 ease-in-out">
+            <img th:each="image : ${product.images}" th:src="@{'/images/large/' + ${image.name}}" alt="Product image"
+              class="object-cover w-full h-64 flex-shrink-0">
+          </div>
+
+          <button type="button"
+            class="carousel-prev absolute top-1/2 left-2 -translate-y-1/2 bg-green-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition">
+            ‹
+          </button>
+          <button type="button"
+            class="carousel-next absolute top-1/2 right-2 -translate-y-1/2 bg-green-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition">
+            ›
+          </button>
+        </div>
+
+        <!-- Product details -->
+        <div class="p-5 flex flex-col flex-grow">
+          <h2 class="text-xl font-semibold text-green-800 mb-2" th:text="${product.name}"></h2>
+          <p class="text-gray-500 mb-4" th:text="'Категорія: ' + ${product.category.name}"></p>
+          <p class="text-lg font-bold text-green-600 mt-auto"
+            th:text="${#numbers.formatDecimal(product.price, 1, 2)} + ' ₴'"></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.product-card').forEach(card => {
+        const container = card.querySelector('.carousel-images');
+        const images = container?.children?.length || 0;
+        if (images <= 1) return;
+
+        let index = 0;
+        const prev = card.querySelector('.carousel-prev');
+        const next = card.querySelector('.carousel-next');
+
+        const updateSlide = () => {
+          container.style.transform = `translateX(-${index * 100}%)`;
+        };
+
+        prev.addEventListener('click', () => {
+          index = (index - 1 + images) % images;
+          updateSlide();
+        });
+
+        next.addEventListener('click', () => {
+          index = (index + 1) % images;
+          updateSlide();
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

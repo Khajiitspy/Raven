@@ -27,6 +27,9 @@ public class ProductEntity {
     @Column
     private boolean isDeleted = false;
 
+    @Column(nullable = false)
+    private double price;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId", nullable = false)
     private CategoryEntity category;

@@ -14,9 +14,14 @@
 
   <nav class="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="font-semibold text-lg hover:text-green-100 transition-colors duration-300">
-        Spring сайт
-      </a>
+      <div>
+        <a href="/" class="font-semibold text-lg hover:text-green-100 transition-colors duration-300">
+          Spring сайт
+        </a>
+        <a href="/products" class="m-8 hover:text-green-100 transition-colors duration-300">
+          Products
+        </a>
+      </div>
 
       <div class="flex gap-6" sec:authorize="!isAuthenticated()">
         <a href="/" class="hover:text-green-100 transition">Головна</a>

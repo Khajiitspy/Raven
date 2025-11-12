@@ -5,6 +5,7 @@
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/controllers/AccountController.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/controllers/GreetingController.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/controllers/HomeController.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/controllers/ProductController.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/controllers/UserController.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/AppDbSeeder.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/constants/RolesConstants.java
@@ -29,5 +30,6 @@
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/security/CustomUserDetails.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/AccountService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/FileService.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/ProductService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/SmtpService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/UserInfoService.java
