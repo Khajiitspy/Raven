@@ -29,7 +29,7 @@
         <img th:src="@{'/'+${uploadDir}+'/medium/' + ${#authentication.principal.image}}" alt="Фото профілю"
           class="w-10 h-10 rounded-full border border-white shadow-md" />
 
-        "font-medium" th:text="${#authentication.name}">Username</span>
+        <span "font-medium" th:text="${#authentication.name}">Username</span>
 
         <form th:action="@{/logout}" method="post">
           <button type="submit" class="bg-white text-green-600 px-3 py-1 rounded hover:bg-green-100 transition">

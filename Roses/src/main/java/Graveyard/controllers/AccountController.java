@@ -20,6 +20,7 @@ public class AccountController {
 
     @GetMapping("/register")
     public String register(Model model) {
+        System.out.println("---------------- Lost Soul ------------------");
         model.addAttribute("registerUserDTO", new RegisterUserDTO());
         return "account/register";
     }
@@ -36,10 +37,15 @@ public class AccountController {
                                HttpServletRequest request,
                                Model model) {
 
+        System.out.println("---------------- Post Soul form------------------");
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("message", "Перевірте правильність введених даних");
             return "account/register";
         }
+
+        System.out.println("---------------- Good Model ------------------");
+
 
         boolean success = accountService.registerUser(form, request);
 
