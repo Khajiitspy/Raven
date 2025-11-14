@@ -1,75 +1,89 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="uk"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      layout:decorate="~{layout}">-->
+<!--<head>-->
+<!--    <title>Список товарів</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div layout:fragment="content" class="flex flex-col items-center">-->
+<!--    <h1 class="text-3xl font-bold mb-6 text-green-700">Список товарів</h1>-->
+
+<!--    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">-->
+<!--        <div th:each="product : ${products}"-->
+<!--             th:replace="components/product-card :: productCard(product = ${product})"></div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="uk" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="uk" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
   layout:decorate="~{layout}">
 
 <head>
-  <title>Наші товари</title>
+  <meta charset="utf-8" />
+  <title>Список товарів</title>
 </head>
 
 <body>
-  <div layout:fragment="content" class="flex flex-col items-center px-6 py-8">
-    <h1 class="text-3xl font-bold mb-8 text-green-700">Наші товари</h1>
+  <div layout:fragment="content" class="flex flex-col items-center">
+    <h1 class="text-3xl font-bold mb-6 text-green-700">Список товарів</h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+    <!-- Search form -->
+    <form th:action="@{/products/list}" method="get" class="mb-6 w-full max-w-lg flex gap-3">
+      <input type="text" name="search" th:value="${search}" placeholder="Пошук товарів..."
+        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-400" />
 
-      <div th:each="product : ${products}"
-        class="product-card bg-white border border-green-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 flex flex-col">
+      <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+        Пошук
+      </button>
+    </form>
 
-        <div class="relative w-full h-64 overflow-hidden group">
-          <div class="carousel-images flex transition-transform duration-500 ease-in-out">
-            <img th:each="image : ${product.images}" th:src="@{'/images/large/' + ${image.name}}" alt="Product image"
-              class="object-cover w-full h-64 flex-shrink-0">
-          </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div th:each="product : ${products}">
+        <div th:replace="~{components/product-card :: productCard(product=${product})}"></div>
+      </div>
+    </div>
 
-          <button type="button"
-            class="carousel-prev absolute top-1/2 left-2 -translate-y-1/2 bg-green-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition">
-            ‹
-          </button>
-          <button type="button"
-            class="carousel-next absolute top-1/2 right-2 -translate-y-1/2 bg-green-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition">
-            ›
-          </button>
+    <div th:if="${page != null}" class="mt-8 flex flex-col items-center gap-4">
+      <div class="flex items-center gap-2">
+        <a th:href="@{/products/list(page=${page.currentPage}, size=${page.pageSize})}" th:if="${page.hasPrevious}"
+          class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold">
+          ← Попередня
+        </a>
+        <span th:unless="${page.hasPrevious}" class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+          ← Попередня
+        </span>
+
+        <div class="flex gap-2">
+          <a th:each="i : ${#numbers.sequence(0, page.totalPages-1)}"
+            th:href="@{/products/list(page=${i+1}, size=${page.pageSize}, search=${search})}" th:text="${i+1}"
+            th:class="${i == page.currentPage} ? 'px-4 py-2 bg-green-600 text-white rounded-lg font-semibold' : 'px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition font-semibold'">
+          </a>
         </div>
 
-        <!-- Product details -->
-        <div class="p-5 flex flex-col flex-grow">
-          <h2 class="text-xl font-semibold text-green-800 mb-2" th:text="${product.name}"></h2>
-          <p class="text-gray-500 mb-4" th:text="'Категорія: ' + ${product.category.name}"></p>
-          <p class="text-lg font-bold text-green-600 mt-auto"
-            th:text="${#numbers.formatDecimal(product.price, 1, 2)} + ' ₴'"></p>
-        </div>
+
+        <a th:href="@{/products/list(page=${page.currentPage + 2}, size=${page.pageSize})}" th:if="${page.hasNext}"
+          class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold">
+          Наступна →
+        </a>
+        <span th:unless="${page.hasNext}" class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+          Наступна →
+        </span>
       </div>
 
+      <div class="text-sm text-gray-600">
+        <span>Сторінка <span th:text="${page.currentPage + 1}">1</span> з <span
+            th:text="${page.totalPages}">1</span></span>
+        <span class="mx-2">|</span>
+        <span>Всього товарів: <span th:text="${page.totalElements}">0</span></span>
+        <span class="mx-2">|</span>
+        <span>На сторінці: <span th:text="${page.pageSize}">12</span></span>
+      </div>
     </div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.product-card').forEach(card => {
-        const container = card.querySelector('.carousel-images');
-        const images = container?.children?.length || 0;
-        if (images <= 1) return;
-
-        let index = 0;
-        const prev = card.querySelector('.carousel-prev');
-        const next = card.querySelector('.carousel-next');
-
-        const updateSlide = () => {
-          container.style.transform = `translateX(-${index * 100}%)`;
-        };
-
-        prev.addEventListener('click', () => {
-          index = (index - 1 + images) % images;
-          updateSlide();
-        });
-
-        next.addEventListener('click', () => {
-          index = (index + 1) % images;
-          updateSlide();
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>

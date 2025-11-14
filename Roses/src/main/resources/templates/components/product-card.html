@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+  <div th:fragment="productCard(product)">
+    <div class="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all 
+                transform hover:-translate-y-1 hover:scale-105 w-72 flex flex-col overflow-hidden">
+
+      <!-- IMAGE -->
+      <div class="w-full aspect-[4/3] bg-green-50 flex items-center justify-center overflow-hidden">
+
+        <div th:if="${product.image != null}">
+          <img th:src="@{'/' + ${uploadDir} + '/medium/' + ${product.image}}" th:alt="${product.name} + ' image'"
+            class="w-full h-40 object-cover" />
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="p-4 flex flex-col flex-1 justify-between">
+
+        <h2 class="text-lg font-semibold text-gray-800 text-center mb-1" th:text="${product?.name}">
+          Назва
+        </h2>
+
+        <span th:text="${product?.categoryName}"
+          class="text-xs font-medium text-green-700 bg-green-100 px-3 py-1 rounded-full mb-2">
+          Категорія
+        </span>
+
+        <p th:text="${product?.description}" class="text-gray-500 text-sm text-center mb-4 line-clamp-1">
+          Опис
+        </p>
+
+        <div class="flex gap-2 mt-2">
+
+          <a th:href="@{/products/{slug}(slug=${product?.slug})}"
+            class="flex-1 text-center py-2 rounded-lg bg-green-500 text-white hover:bg-green-600">
+            Деталі
+          </a>
+
+          <button type="button" class="flex-1 py-2 rounded-lg bg-yellow-400 text-white hover:bg-yellow-500">
+            В кошик
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
