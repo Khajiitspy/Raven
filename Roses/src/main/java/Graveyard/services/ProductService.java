@@ -7,15 +7,18 @@ import Graveyard.data.common.PageResponseDTO;
 import Graveyard.data.data_transfer_objects.product.ProductCreateDTO;
 import Graveyard.data.data_transfer_objects.product.ProductItemDTO;
 import Graveyard.data.data_transfer_objects.product.ProductListItemDTO;
+import Graveyard.data.search.ProductSearchDTO;
 import Graveyard.mappers.ProductMapper;
 import Graveyard.entities.CategoryEntity;
 import Graveyard.entities.ImageEntity;
 import Graveyard.entities.ProductEntity;
 import Graveyard.repositories.ICategoryRepository;
 import Graveyard.repositories.IProductRepository;
+import Graveyard.specifications.ProductSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -76,9 +79,13 @@ public class ProductService {
     }
 
     @Transactional()
-    public PageResponseDTO<ProductListItemDTO> getAllPaginated(int page, int size) {
+    public PageResponseDTO<ProductListItemDTO> getAllPaginated(int page, int size,
+                                                               ProductSearchDTO searchDTO) {
         Pageable pageable = PageRequest.of(page-1, size);
-        Page<ProductEntity> productPage = productRepository.findAll(pageable);
+
+        Specification<ProductEntity> spec = ProductSpecifications.search(searchDTO);
+
+        Page<ProductEntity> productPage = productRepository.findAll(spec, pageable);
 
         List<ProductListItemDTO> content = productPage.getContent()
                 .stream()
@@ -102,39 +109,4 @@ public class ProductService {
                 .build();
     }
 
-    public PageResponseDTO<ProductListItemDTO> searchPaginated(String search, int page, int size) {
-
-        Pageable pageable = PageRequest.of(page - 1, size);
-
-        Page<ProductEntity> productPage;
-
-        if (search == null || search.isBlank()) {
-            productPage = productRepository.findAll(pageable);
-        } else {
-            productPage = productRepository.searchByNameOrDescription(search, pageable);
-        }
-
-        List<ProductListItemDTO> content = productPage.getContent()
-        .stream()
-        .map(e -> {
-            ProductListItemDTO dto = productMapper.toListItemDTO(e);
-            System.out.println("Mapped product: " + dto);
-            return dto;
-        })
-        .toList();
-
-        PageDTO pageDTO = PageDTO.builder()
-                .currentPage(page - 1)
-                .totalPages(productPage.getTotalPages())
-                .totalElements(productPage.getTotalElements())
-                .pageSize(productPage.getSize())
-                .hasNext(productPage.hasNext())
-                .hasPrevious(productPage.hasPrevious())
-                .build();
-
-        return PageResponseDTO.<ProductListItemDTO>builder()
-                .content(content)
-                .page(pageDTO)
-                .build();
-    }
 }

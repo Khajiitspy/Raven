@@ -19,6 +19,7 @@
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/data_transfer_objects/product/ProductCreateDTO.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/data_transfer_objects/product/ProductItemDTO.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/data_transfer_objects/product/ProductListItemDTO.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/search/ProductSearchDTO.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/seed/CategorySeed.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/seed/ProductSeed.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/data/smtp/EmailConfiguration.java
@@ -36,7 +37,9 @@
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/repository/IUserRepository.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/security/CustomUserDetails.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/AccountService.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/CategoryService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/FileService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/ProductService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/SmtpService.java
 /home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/services/UserInfoService.java
+/home/magicalabyss/Documents/Projects/Raven/Roses/src/main/java/Graveyard/specifications/ProductSpecifications.java

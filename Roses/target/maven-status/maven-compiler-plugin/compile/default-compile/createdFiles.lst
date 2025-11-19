@@ -6,6 +6,7 @@ Graveyard/data/data_transfer_objects/ResetPasswordDTO.class
 Graveyard/data/smtp/EmailConfiguration.class
 Graveyard/data/data_transfer_objects/product/ProductItemDTO.class
 Graveyard/repositories/ICategoryRepository.class
+Graveyard/specifications/ProductSpecifications.class
 Graveyard/repository/IRoleRepository.class
 Graveyard/controllers/GreetingController.class
 Graveyard/data/common/PageResponseDTO$PageResponseDTOBuilder.class
@@ -22,6 +23,7 @@ Graveyard/controllers/HomeController.class
 Graveyard/services/SmtpService.class
 Graveyard/repositories/IProductRepository.class
 Graveyard/services/AccountService.class
+Graveyard/data/search/ProductSearchDTO.class
 Graveyard/mappers/CategoryMapper.class
 Graveyard/data/smtp/EmailMessage.class
 Graveyard/repository/IUserRepository.class
@@ -33,6 +35,7 @@ Graveyard/services/SmtpService$1.class
 Graveyard/entities/ImageEntity.class
 Graveyard/data/seed/ProductSeed.class
 Graveyard/mappers/CategoryMapperImpl.class
+Graveyard/services/CategoryService.class
 Graveyard/entities/RoleEntity.class
 Graveyard/config/GlobalModelAttributes.class
 Graveyard/mappers/ProductMapperImpl.class

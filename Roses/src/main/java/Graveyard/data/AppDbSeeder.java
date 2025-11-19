@@ -2,8 +2,8 @@ package Graveyard.data;
 
 import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;
-import lombok.RequiredArgsConstructor;
 import com.ibm.icu.text.Transliterator;
+import lombok.RequiredArgsConstructor;
 import Graveyard.data.constants.RolesConstants;
 import Graveyard.data.seed.CategorySeed;
 import Graveyard.data.seed.ProductSeed;
@@ -95,13 +95,13 @@ public class AppDbSeeder {
                     String slug = slugify.slugify(latinText);
 
                     seed.setSlug(slug);
+                    seed.setPrice(faker.random().nextInt(1000, 10000));
 
                     seed.setDescription(faker.lorem().paragraph());
 
                     var randomCategory = categories.get(faker.random().nextInt(categories.size()));
                     seed.setCategoryId(randomCategory.getId());
 
-                    seed.setPrice(faker.number().randomDouble(2, 100, 2000));
                     ProductEntity product = productMapper.toEntity(seed);
                     product.setCategory(randomCategory);
                     int imagesCount = faker.random().nextInt(1,3);
