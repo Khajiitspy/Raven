@@ -1,11 +1,20 @@
-import { createRoot } from 'react-dom/client'
-import { Provider } from "react-redux";
-import { store } from "./store";
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import {Provider} from "react-redux";
+import {store} from "./store";
+import {BrowserRouter} from "react-router";
+import ThemeProvider from './components/ThemeProvider.tsx';
 
 createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+    <StrictMode>
+        <Provider store={store}>
+            <ThemeProvider>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
+            </ThemeProvider>
+        </Provider>
+    </StrictMode>,
 )

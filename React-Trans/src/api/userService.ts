@@ -2,13 +2,19 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { createBaseQuery } from "../utils/createBaseQuery";
 
 export interface IUserRegister {
+    lastName: string;
+    name: string;
     email: string;
+    phone: string;
     password: string;
 }
 
 export interface IUserItem {
     id: number;
+    lastName: string;
+    name: string;
     email: string;
+    phone: string;
     dateCreated: string;
 }
 

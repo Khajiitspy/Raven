@@ -1,12 +1,22 @@
-import MainHeader from "./MainHeader";
+import { Outlet } from "react-router";
+import MainHeader from "./MainHeader.tsx";
+import MainFooter from "./MainFooter.tsx";
 
-export default function MainLayout({ children }) {
+export const MainLayout = () => {
     return (
-        <div className="min-h-screen bg-neutral-secondary-soft pt-20">
+        <>
+
+        <div className={"mx-auto bg-[var(--bg)] text-[var(--fg)]"}>
             <MainHeader />
-            <main className="max-w-screen-xl mx-auto p-4">
-                {children}
+
+            <main>
+                <Outlet />
             </main>
+
+            <MainFooter />
         </div>
+    </>
     );
-}
+};
+
+export default MainLayout;

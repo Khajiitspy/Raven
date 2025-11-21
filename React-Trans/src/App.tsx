@@ -1,23 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import MainLayout from "./layout/Main/MainLayout";
-import CountriesPage from "./pages/country/CountriesPage";
-import CreateCountryPage from "./pages/country/CreateCountryPage";
-import RegisterPage from "./pages/account/RegisterPage";
+import './App.css'
+import {Route, Routes} from "react-router";
+import MainLayout from "./layout/Main/MainLayout.tsx";
+import NotFoundPage from "./pages/common/NotFoundPage.tsx";
+import UserHomePage from "./pages/user/UserHomePage";
+import RegisterPage from "./pages/account/RegisterPage/index.tsx";
+import CreateCountryPage from './pages/country/CreateCountryPage.tsx';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<div>Home Page</div>} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/countries" element={<CountriesPage />} />
-          <Route path="/countries/create" element={<CreateCountryPage />} />
-        </Routes>
-      </MainLayout>
-    </BrowserRouter>
-  );
+
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={<MainLayout />}>
+                    <Route index element={<UserHomePage/>} />
+
+                    <Route path="/countries/create" element={<CreateCountryPage />} />
+
+                    <Route path={"/register"} element={<RegisterPage/>} />
+                </Route>
+
+                <Route path="*" element={<NotFoundPage/>} />
+            </Routes>
+        </>
+    )
 }
 
-export default App;
+export default App

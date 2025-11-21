@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useCreateCountryMutation } from "../../api/countryService";
+import {useCreateCountryMutation} from "../../api/countryService.ts";
 
-export default function CreateCountryPage() {
+const CreateCountryPage = () => {
     const [createCountry, { isLoading }] = useCreateCountryMutation();
 
     const [form, setForm] = useState({
@@ -121,3 +121,5 @@ export default function CreateCountryPage() {
         </div>
     );
 }
+
+export default CreateCountryPage;

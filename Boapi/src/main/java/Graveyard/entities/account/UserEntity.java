@@ -10,9 +10,17 @@ import lombok.Data;
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity<Long> {
+    @Column(unique = true, nullable = false)
+    private String lastName;
+
+    @Column(unique = true, nullable = false)
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false, unique = true)
+    private String phone;
 
     @Column(nullable = false)
     private String password;
