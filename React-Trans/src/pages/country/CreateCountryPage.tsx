@@ -55,7 +55,7 @@ const CreateCountryPage = () => {
             <div className="max-w-[900px] w-full rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-gray-800">
                 <div className="grid md:grid-cols-2">
 
-                    <div className="p-10 hidden md:flex flex-col justify-center">
+                    <div className="card p-10 hidden md:flex flex-col justify-center">
                         <h2 className="text-3xl font-semibold mb-4">Let's create new worlds!</h2>
                     </div>
 

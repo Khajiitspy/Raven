@@ -108,6 +108,11 @@ nav {
   color: var(--text-primary);
 }
 
+footer {
+  background: var(--bg-navbar);
+  color: var(--text-primary);
+}
+
 .card {
   background: var(--bg-card);
   color: var(--text-primary);
