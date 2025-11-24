@@ -17,6 +17,7 @@ public class UserService {
 
     private final IUserRepository userRepository;
     private final UserMapper userMapper;
+    private final FileService fileService;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -25,12 +26,16 @@ public class UserService {
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
+        if (userRepository.existsByPhone(dto.getPhone())) {
+            throw new IllegalArgumentException("Phone already in use");
+        }
+
+        String fileName = fileService.load(dto.getImage());
 
         UserEntity user = new UserEntity();
-        user.setLastName(dto.getLastName());
-        user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setPhone(dto.getPhone());
+        user.setImage(fileName);
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         UserEntity saved = userRepository.save(user);

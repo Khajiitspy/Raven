@@ -11,6 +11,7 @@ Graveyard/services/CountryService.class
 Graveyard/data/mappers/UserMapper.class
 Graveyard/entities/common/BaseEntity.class
 Graveyard/entities/location/CountryEntity.class
+Graveyard/exceptions/GlobalExceptionHandler.class
 Graveyard/data/mappers/CountryMapper.class
 Graveyard/data/dto/country/CountryItemDTO.class
 Graveyard/services/UserService.class

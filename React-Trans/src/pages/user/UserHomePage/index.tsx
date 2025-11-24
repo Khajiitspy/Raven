@@ -7,7 +7,7 @@ const UserHomePage: React.FC = () => {
     return (
         <div className="w-full flex flex-col">
 
-            <section className="bg-gradient-to-r from-blue-800 to-blue-500 text-white py-28 px-4 text-center shadow-xl">
+            <section className="card py-28 px-4 text-center shadow-xl">
                 <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-xl">
                     Пасажирські перевезення
                 </h1>
@@ -24,7 +24,7 @@ const UserHomePage: React.FC = () => {
             </section>
 
             <section className="max-w-7xl w-full mx-auto py-16 px-4">
-                <h2 className="text-4xl font-bold text-center mb-12 text-blue-700 drop-shadow-sm">
+                <h2 className="text-4xl font-bold text-center mb-12 drop-shadow-sm">
                     Популярні напрямки
                 </h2>
 

@@ -1,26 +1,35 @@
-import { useState} from "react";
+import { useState, type FormEvent } from "react";
 import { useRegisterMutation } from "../../../api/userService";
+
+import TextInput from "../../../components/inputs/TextInput";
+import PasswordInput from "../../../components/inputs/PasswordInput";
+import FileInput from "../../../components/inputs/FileInput";
 
 const RegisterPage: React.FC = () => {
     const [register, { isLoading }] = useRegisterMutation();
 
     const [form, setForm] = useState({
-        lastName: "",
-        name: "",
         email: "",
         phone: "",
         password: "",
         confirmPassword: "",
     });
 
-    const [message, setMessage] = useState(null);
-    const [error, setError] = useState(null);
+    const [image, setImage] = useState<File | null>(null);
+    const [preview, setPreview] = useState<string | null>(null);
 
-    const handleChange = (e) => {
+    const [message, setMessage] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         setForm({ ...form, [e.target.name]: e.target.value });
+
+    const handleImage = (file: File | null) => {
+        setImage(file);
+        setPreview(file ? URL.createObjectURL(file) : null);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (form.password !== form.confirmPassword) {
@@ -30,29 +39,34 @@ const RegisterPage: React.FC = () => {
 
         try {
             setError(null);
-            const res = await register({
-                lastName: form.lastName,
-                name: form.name,
-                email: form.email,
-                phone: form.phone,
-                password: form.password,
-            }).unwrap();
+            setMessage(null);
+
+            const res = await register({ ...form, image }).unwrap();
 
             setMessage("Registered successfully!");
-        } catch (err) {
-            setError("Registration failed");
+            setForm({ email: "", phone: "", password: "", confirmPassword: "" });
+            setImage(null);
+            setPreview(null);
+        } catch (err: any) {
+            const msg =
+                err?.data?.error ||
+                err?.data?.message ||
+                err?.error ||
+                "Unknown error";
+
+            setError(msg);
+            setMessage(null);
         }
     };
-
 
     return (
         <div className="p-5 min-h-screen flex items-center justify-center">
             <div className="max-w-[900px] w-full rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-gray-800">
                 <div className="grid md:grid-cols-2">
 
-                    <div className="bg-blue-600 p-10 hidden md:flex flex-col justify-center">
-                        <h2 className="text-white text-3xl font-semibold mb-4">Ласкаво просимо!</h2>
-                        <p className="text-white text-lg">
+                    <div className="card p-10 hidden md:flex flex-col justify-center">
+                        <h2 className="text-3xl font-semibold mb-4">Ласкаво просимо!</h2>
+                        <p className="text-lg">
                             Зареєструйтесь, щоб розпочати.
                         </p>
                     </div>
@@ -67,139 +81,53 @@ const RegisterPage: React.FC = () => {
 
                         <form onSubmit={handleSubmit} className="space-y-5">
 
-                            <div>
-                                <label className="block mb-1 font-medium">
-                                    Прізвище
-                                </label>
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={form.lastName}
-                                    onChange={handleChange}
-                                    className="
-                                        w-full px-4 py-2 rounded-lg border
-                                        focus:ring-2 focus:ring-blue-500
-                                        transition
-                                    "
-                                    placeholder="Введіть прізвище"
-                                    required
-                                />
-                            </div>
+                            <FileInput
+                                label="Image"
+                                onFileSelect={handleImage}
+                                preview={preview}
+                            />
 
-                            <div>
-                                <label className="block mb-1 font-medium ">
-                                    Ім’я
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={form.name}
-                                    onChange={handleChange}
+                            <TextInput
+                                label="Email"
+                                name="email"
+                                type="email"
+                                value={form.email}
+                                required
+                                onChange={handleChange}
+                            />
 
-                                    className="
-                                        w-full px-4 py-2 rounded-lg border
-                                        focus:ring-2 focus:ring-blue-500
-                                        transition
-                                    "
-                                    placeholder="Введіть ім’я"
-                                    required
-                                />
-                            </div>
+                            <TextInput
+                                label="Телефон"
+                                name="phone"
+                                type="tel"
+                                value={form.phone}
+                                required
+                                onChange={handleChange}
+                            />
 
-                            <div>
-                                <label className="block mb-1 font-medium">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    className="
-                                        w-full px-4 py-2 rounded-lg border
-                                        focus:ring-2 focus:ring-blue-500
-                                        transition
-                                    "
-                                    placeholder="example@gmail.com"
-                                    required
-                                />
-                            </div>
+                            <PasswordInput
+                                label="Пароль"
+                                name="password"
+                                value={form.password}
+                                onChange={handleChange}
+                            />
 
-                            <div>
-                                <label className="block mb-1 font-medium">
-                                    Телефон
-                                </label>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    value={form.phone}
-                                    onChange={handleChange}
-                                    className="
-                                        w-full px-4 py-2 rounded-lg border
-                                        focus:ring-2 focus:ring-blue-500
-                                        transition
-                                    "
-                                    placeholder="+380..."
-                                    required
-                                />
-                            </div>
+                            <PasswordInput
+                                label="Confirm Пароль"
+                                name="confirmPassword"
+                                value={form.confirmPassword}
+                                onChange={handleChange}
+                            />
 
-                            <div>
-                                <label className="block mb-1 font-medium">
-                                    Пароль
-                                </label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={form.password}
-                                    onChange={handleChange}
-                                    className="
-                                        w-full px-4 py-2 rounded-lg border
-                                        focus:ring-2 focus:ring-blue-500
-                                        transition
-                                    "
-                                    placeholder="Введіть пароль"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block mb-1 font-medium">
-                                    Confirm Пароль
-                                </label>
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    value={form.confirmPassword}
-                                    onChange={handleChange}
-                                    className="
-                                        w-full px-4 py-2 rounded-lg border
-                                        focus:ring-2 focus:ring-blue-500
-                                        transition
-                                    "
-                                    placeholder="Confirmaite пароль (:"
-                                    required
-                                />
-                            </div>
-
-                            {error && (
-                                <div className="text-sm">{error}</div>
-                            )}
-
-                            {message && (
-                                <div className="text-sm">{message}</div>
-                            )}
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+                            {message && <p className="text-green-500 text-sm">{message}</p>}
 
                             <button
                                 type="submit"
-                                className="
-                                    w-full bg-blue-600 text-white py-3
-                                    rounded-lg font-semibold
-                                    transition hover:bg-blue-700 active:scale-95
-                                    shadow-md
-                                "
+                                disabled={isLoading}
+                                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold transition hover:bg-blue-700 active:scale-95 disabled:opacity-50"
                             >
-                                Зареєструватися
+                                {isLoading ? "Зачекайте..." : "Зареєструватися"}
                             </button>
                         </form>
 

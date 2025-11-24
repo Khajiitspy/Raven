@@ -1,6 +1,9 @@
 import { useState } from "react";
 import {useCreateCountryMutation} from "../../api/countryService.ts";
 
+import TextInput from "../../../src/components/inputs/TextInput";
+import FileInput from "../../../src/components/inputs/FileInput";
+
 const CreateCountryPage = () => {
     const [createCountry, { isLoading }] = useCreateCountryMutation();
 
@@ -48,76 +51,73 @@ const CreateCountryPage = () => {
     };
 
     return (
-        <div className="max-w-lg mx-auto bg-neutral-primary border border-default shadow p-6 rounded-lg">
-            <h1 className="text-2xl text-heading font-semibold mb-4">Create Country</h1>
+        <div className="p-5 min-h-screen flex items-center justify-center">
+            <div className="max-w-[900px] w-full rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-gray-800">
+                <div className="grid md:grid-cols-2">
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="p-10 hidden md:flex flex-col justify-center">
+                        <h2 className="text-3xl font-semibold mb-4">Let's create new worlds!</h2>
+                    </div>
 
-                <div>
-                    <label className="block text-heading mb-1">Name</label>
-                    <input
-                        name="name"
-                        type="text"
-                        value={form.name}
-                        onChange={handleChange}
-                        className="block w-full p-2.5 rounded-base border border-default bg-neutral-secondary-soft focus:ring-brand focus:border-brand"
-                        required
-                    />
+                    <div className="p-6 md:p-10 flex flex-col justify-center">
+                        <div className="text-center mb-6">
+                            <h3 className="text-2xl font-semibold mb-1">Create Country</h3>
+                            <p className="">
+                                Fill in the new Country's info 
+                            </p>
+                        </div>
+
+
+                        <form onSubmit={handleSubmit} className="space-y-4">
+
+                            <TextInput
+                                label="Name"
+                                name="name"
+                                type="text"
+                                value={form.name}
+                                required
+                                onChange={handleChange}
+                            />
+
+                            <TextInput
+                                label="Code"
+                                name="code"
+                                type="text"
+                                value={form.code}
+                                required
+                                onChange={handleChange}
+                            />
+
+                            <TextInput
+                                label="Slug"
+                                name="slug"
+                                type="text"
+                                value={form.slug}
+                                required
+                                onChange={handleChange}
+                            />
+
+
+                            <FileInput
+                                label="Image"
+                                onFileSelect={handleImage}
+                                preview={preview}
+                            />
+
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+                            {message && <p className="text-green-500 text-sm">{message}</p>}
+
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold transition hover:bg-blue-700 active:scale-95 disabled:opacity-50"
+                            >
+                                {isLoading ? "Saving..." : "Create Country"}
+                            </button>
+                        </form>
+                    </div>
                 </div>
-
-                <div>
-                    <label className="block text-heading mb-1">Code</label>
-                    <input
-                        name="code"
-                        type="text"
-                        value={form.code}
-                        onChange={handleChange}
-                        className="block w-full p-2.5 rounded-base border border-default bg-neutral-secondary-soft focus:ring-brand focus:border-brand"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-heading mb-1">Slug</label>
-                    <input
-                        name="slug"
-                        type="text"
-                        value={form.slug}
-                        onChange={handleChange}
-                        className="block w-full p-2.5 rounded-base border border-default bg-neutral-secondary-soft focus:ring-brand focus:border-brand"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-heading mb-1">Image</label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImage}
-                        className="block w-full text-body file:mr-4 file:py-2.5 file:px-4 file:rounded-base file:border-0 file:bg-brand file:text-white hover:file:bg-opacity-90"
-                    />
-
-                    {preview && (
-                        <img
-                            src={preview}
-                            alt="Preview"
-                            className="mt-3 h-32 w-full object-cover rounded border border-default"
-                        />
-                    )}
-                </div>
-
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-                {message && <p className="text-green-500 text-sm">{message}</p>}
-
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full py-2.5 bg-brand text-white rounded-base hover:bg-opacity-90 transition disabled:opacity-50"
-                >
-                    {isLoading ? "Saving..." : "Create Country"}
-                </button>
-            </form>
+            </div>
         </div>
     );
 }

@@ -1,11 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { createBaseQuery } from "../utils/createBaseQuery";
+import { serialize } from "object-to-formdata";
 
 export interface IUserRegister {
-    lastName: string;
-    name: string;
     email: string;
     phone: string;
+    image?: File | null;
     password: string;
 }
 
@@ -26,14 +26,15 @@ export const userService = createApi({
     endpoints: (builder) => ({
 
         register: builder.mutation<IUserItem, IUserRegister>({
-            query: (body) => ({
-                url: "register",
-                method: "POST",
-                body,
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }),
+            query: (body) => {
+                const formData = serialize(body, { indices: false });
+
+                return {
+                  url: "register",
+                  method: "POST",
+                  body: formData,
+                };
+            },
             invalidatesTags: ["Users"]
         }),
     })

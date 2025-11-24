@@ -1,14 +1,17 @@
 import {Link} from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { setTheme } from "../../store/themeSlice";
-import { type RootState } from "../../store";
+import {type RootState, useAppDispatch, useAppSelector} from "../../store";
+import {setTheme, type ThemeType} from "../../store/themeSlice.ts";
+import changeTheme from "../../utils/changeTheme.ts";
 
 export const MainHeader = () => {
-    const dispatch = useDispatch();
-    const theme = useSelector((state: RootState) => state.theme.theme);
 
-    const changeTheme = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      dispatch(setTheme(e.target.value as any));
+    const dispatch = useAppDispatch();
+    const theme = useAppSelector((state: RootState) => state.theme.theme);
+
+    changeTheme(theme);
+
+    const handleChangeTheme = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setTheme(e.target.value as ThemeType));
     };
 
     return (
@@ -20,10 +23,11 @@ export const MainHeader = () => {
                         <span
                             className="self-center text-xl text-heading font-semibold whitespace-nowrap">Bogdan-bus</span>
                     </Link>
+
                     <select
-                      value={theme}
-                      onChange={changeTheme}
-                      className="
+                        value={theme}
+                        onChange={handleChangeTheme}
+                        className="
                         px-3 py-1.5 rounded-lg text-sm font-medium
                         bg-neutral-secondary-soft
                         border border-neutral-tertiary
@@ -32,11 +36,11 @@ export const MainHeader = () => {
                         transition
                       "
                     >
-                      <option value="light">Light</option>
-                      <option value="dark">Dark</option>
-                      <option value="pink">Pink</option>
-                      <option value="ukraine">Ukraine</option>
-                      <option value="dracula">Lavender</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="pink">Pink</option>
+                        <option value="ukraine">Ukraine</option>
+                        <option value="dracula">Dracula</option>
                     </select>
 
                     <button data-collapse-toggle="navbar-default" type="button"
@@ -51,6 +55,13 @@ export const MainHeader = () => {
                     </button>
                     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
+                            <li>
+                                <Link to="/countries/create"
+                                      className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:hover:text-fg-brand md:p-0">
+                                    Add Country
+                                </Link>
+                            </li>
+
                             <li>
                                 <Link to={"/register"}
                                       className="block py-2 px-3 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"

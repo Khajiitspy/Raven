@@ -15,6 +15,7 @@
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/entities/account/UserEntity.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/entities/common/BaseEntity.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/entities/location/CountryEntity.java
+/home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/exceptions/GlobalExceptionHandler.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/repositories/ICountryRepository.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/repositories/IUserRepository.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/services/CountryService.java
