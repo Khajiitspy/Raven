@@ -1,24 +1,44 @@
 package Graveyard.entities.account;
 
-import Graveyard.entities.common.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity<Long> {
-    @Column(nullable = false, unique = true)
+@Data
+public class UserEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(unique = true, nullable = false)
+    @Email(message = "Invalid email")
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true, nullable = false)
     private String phone;
+
+    @Column(nullable = true)
+    private String image;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true, length = 200)
-    private String image;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<RoleEntity> roles = new HashSet<>();
 }

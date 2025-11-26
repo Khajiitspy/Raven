@@ -1,37 +1,50 @@
 package Graveyard.data.mappers;
 
 import Graveyard.data.dto.account.UserItemDTO;
+import Graveyard.data.dto.account.UserRegisterDTO;
 import Graveyard.entities.account.UserEntity;
-import java.time.format.DateTimeFormatter;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-11-24T14:23:18-0500",
+    date = "2025-11-26T10:53:50-0500",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.9 (Red Hat, Inc.)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
-    private final DateTimeFormatter dateTimeFormatter_yyyy_MM_dd_HH_mm_ss_11333195168 = DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss" );
-
     @Override
-    public UserItemDTO toDto(UserEntity entity) {
-        if ( entity == null ) {
+    public UserItemDTO toDto(UserEntity category) {
+        if ( category == null ) {
             return null;
         }
 
         UserItemDTO userItemDTO = new UserItemDTO();
 
-        if ( entity.getCreatedAt() != null ) {
-            userItemDTO.setDateCreated( dateTimeFormatter_yyyy_MM_dd_HH_mm_ss_11333195168.format( entity.getCreatedAt() ) );
-        }
-        userItemDTO.setId( entity.getId() );
-        userItemDTO.setEmail( entity.getEmail() );
-        userItemDTO.setPhone( entity.getPhone() );
-        userItemDTO.setImage( entity.getImage() );
+        userItemDTO.setId( category.getId() );
+        userItemDTO.setLastName( category.getLastName() );
+        userItemDTO.setName( category.getName() );
+        userItemDTO.setEmail( category.getEmail() );
+        userItemDTO.setPhone( category.getPhone() );
+        userItemDTO.setImage( category.getImage() );
 
         return userItemDTO;
+    }
+
+    @Override
+    public UserEntity fromRegisterDTO(UserRegisterDTO dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        UserEntity userEntity = new UserEntity();
+
+        userEntity.setLastName( dto.getLastName() );
+        userEntity.setName( dto.getName() );
+        userEntity.setEmail( dto.getEmail() );
+        userEntity.setPhone( dto.getPhone() );
+
+        return userEntity;
     }
 }

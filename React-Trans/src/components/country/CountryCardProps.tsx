@@ -13,7 +13,7 @@ const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
     return (
         <div
             className="
-                group relative rounded-2xl overflow-hidden
+                group card relative rounded-2xl overflow-hidden
                 shadow-xl bg-white/5 backdrop-blur-sm
                 transition-all duration-500
                 hover:-translate-y-3 hover:shadow-2xl hover:scale-[1.02]

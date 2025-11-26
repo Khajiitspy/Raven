@@ -1,15 +1,16 @@
 package Graveyard.entities.location;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import Graveyard.entities.common.BaseEntity;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "countries")
 public class CountryEntity extends BaseEntity<Long> {
+
     @Column(nullable = false)
     private String name;
 
@@ -20,4 +21,7 @@ public class CountryEntity extends BaseEntity<Long> {
     private String slug;
 
     private String image;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CityEntity> cities;
 }
