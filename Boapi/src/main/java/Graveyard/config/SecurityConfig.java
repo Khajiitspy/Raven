@@ -46,10 +46,9 @@ public class SecurityConfig {
                         .requestMatchers("/rest-api-docs/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/api/categories/search").permitAll()
-                        .requestMatchers("/api/categories/**").hasAuthority("Admin")
-
-                        .requestMatchers(HttpMethod.GET, "/api/products/search").permitAll()
+                        .requestMatchers("/api/countries/**").permitAll()
+                        .requestMatchers("/api/cities/**").permitAll()
+                        .requestMatchers("/api/files/**").permitAll()
 
                         //.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
