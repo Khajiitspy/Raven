@@ -3,6 +3,7 @@ package Graveyard.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import Graveyard.data.dto.account.UserRegisterDTO;
+import Graveyard.data.dto.account.LoginDto;
 import Graveyard.data.dto.account.UserItemDTO;
 import Graveyard.services.UserService;
 import Graveyard.validators.helpers.ValidatedDto;
@@ -22,5 +23,16 @@ public class UserController {
     @PostMapping(value = "/register", consumes = MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UserItemDTO> register(@ValidatedDto @ModelAttribute UserRegisterDTO dto) {
         return ResponseEntity.ok(accountService.registerUser(dto));
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<Object> login(@RequestBody LoginDto dto) {
+        try {
+            var auth = accountService.login(dto);
+            return ResponseEntity.ok(auth);
+        }
+        catch (Exception ex) {
+            return ResponseEntity.badRequest().body("Невірно введені дані! Спробуйте ще раз!");
+        }
     }
 }

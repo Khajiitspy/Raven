@@ -1,12 +1,17 @@
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/App.java
+/home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/ApplicationConfig.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/CorsConfig.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/GlobalModelAttributes.java
+/home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/JwtAuthenticationFilter.java
+/home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/JwtService.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/SecurityConfig.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/config/WebConfig.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/controllers/CountryController.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/controllers/HomeController.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/controllers/UserController.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/data/common/ValidationException.java
+/home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/data/dto/account/AuthResponseDto.java
+/home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/data/dto/account/LoginDto.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/data/dto/account/UserItemDTO.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/data/dto/account/UserRegisterDTO.java
 /home/magicalabyss/Documents/Projects/Raven/Boapi/src/main/java/Graveyard/data/dto/country/CountryCreateDTO.java

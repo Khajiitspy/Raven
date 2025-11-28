@@ -1,14 +1,18 @@
 package Graveyard.services;
 
 import lombok.RequiredArgsConstructor;
+import Graveyard.config.JwtService;
 import Graveyard.data.dto.account.UserRegisterDTO;
 import Graveyard.data.dto.account.UserItemDTO;
+import Graveyard.data.dto.account.LoginDto;
+import Graveyard.data.dto.account.AuthResponseDto;
 import Graveyard.data.mappers.CountryMapper;
 import Graveyard.data.mappers.UserMapper;
 import Graveyard.entities.account.RoleEntity;
 import Graveyard.entities.account.UserEntity;
 import Graveyard.repository.IRoleRepository;
 import Graveyard.repository.IUserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final IRoleRepository roleRepository;
     private final FileService fileService;
+    private final JwtService jwtService;
     private final UserMapper userMapper;
 
     public UserItemDTO registerUser(UserRegisterDTO dto) {
@@ -49,5 +54,18 @@ public class UserService {
 
     public List<UserEntity> GetAllUsers() {
         return userRepository.findAll();
+    }
+
+    public AuthResponseDto login(LoginDto request) {
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow();
+        var isValid = passwordEncoder.matches(request.getPassword(), user.getPassword());
+        if(!isValid) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        var jwtToekn = jwtService.generateAccessToken(user);
+        return AuthResponseDto.builder()
+                .token(jwtToekn)
+                .build();
     }
 }
