@@ -63,6 +63,13 @@ export const MainHeader = () => {
                             </li>
 
                             <li>
+                                <Link to="/cities/create"
+                                      className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:hover:text-fg-brand md:p-0">
+                                    Add City
+                                </Link>
+                            </li>
+
+                            <li>
                                 <Link to={"/register"}
                                       className="block py-2 px-3 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
                                       aria-current="page">Register</Link>
